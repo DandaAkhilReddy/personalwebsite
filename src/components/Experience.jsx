@@ -86,7 +86,7 @@ function ExperienceCard({ exp, index }) {
     >
       <div className="glass rounded-2xl p-8 hover:border-white/30 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
-          <div className={`text-4xl p-3 bg-gradient-to-br ${exp.color} rounded-xl`}>
+          <div className={`text-4xl p-3 bg-gradient-to-br ${edu.color} rounded-xl`}>
             {exp.icon}
           </div>
           <div className="flex-1">
@@ -129,7 +129,7 @@ function EducationCard({ edu, index }) {
       whileHover={{ y: -10, scale: 1.05 }}
       className="glass rounded-2xl p-8"
     >
-      <div className={`text-4xl p-3 bg-gradient-to-br ${exp.color} rounded-xl`}>
+      <div className={`text-4xl p-3 bg-gradient-to-br ${edu.color} rounded-xl`}>
         <div className="text-5xl">{edu.icon}</div>
       </div>
       <h3 className="text-2xl font-bold mb-2">{edu.school}</h3>

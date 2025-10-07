@@ -1,24 +1,31 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Tilt from "react-parallax-tilt"
 
 const projects = [
   {
-    title: 'HHA Medicine Platform',
-    subtitle: 'Azure-based healthcare analytics system',
+    title: 'Healthcare ML Platform - HHA Medicine',
+    subtitle: 'Azure ML | RAG System | HIPAA Compliant',
     icon: '🏥',
     gradient: 'from-blue-500 to-purple-600',
     metrics: [
       { value: '100GB+', label: 'Daily Data' },
-      { value: '15', label: 'Hospitals' },
-      { value: '50K+', label: 'Decisions' },
-      { value: '23%', label: 'Accuracy Boost' }
+      { value: '15+', label: 'Hospitals' },
+      { value: '50K+', label: 'Decisions/Day' },
+      { value: '95%', label: 'Accuracy' }
     ],
-    description: 'Architected HIPAA-compliant Azure platform processing healthcare data across multiple facilities. Implemented RAG system with Cognitive Search and Azure ML for natural language queries. Achieved $2M annual savings through improved denial prediction.',
-    tech: ['Azure ML', 'Data Lake Gen2', 'Synapse', 'PyTorch', 'Docker', 'Kubernetes']
+    highlights: [
+      'Built scalable ML pipelines serving 15+ hospitals using Azure ML',
+      'Implemented RAG system using Azure Cognitive Services for clinical data analysis',
+      'Achieved 95% model accuracy, improving from 72% baseline',
+      'Established A/B testing framework, improving prediction accuracy by 23%',
+      'Processing real-time healthcare data with sub-second query latency'
+    ],
+    tech: ['Azure ML', 'PyTorch', 'Cognitive Search', 'Data Lake Gen2', 'Synapse Analytics', 'Kubernetes']
   },
   {
-    title: 'Fleet Edge AI System',
-    subtitle: 'AWS computer vision for driver safety',
+    title: 'Fleet Edge AI - Amazon',
+    subtitle: 'Real-time Computer Vision | IoT | Edge Computing',
     icon: '🚗',
     gradient: 'from-orange-500 to-red-600',
     metrics: [
@@ -27,19 +34,33 @@ const projects = [
       { value: '100K', label: 'Req/Sec' },
       { value: '40%', label: 'Latency Cut' }
     ],
-    description: 'Built edge AI for fleet safety monitoring at Amazon. Deployed YOLOv3 on Raspberry Pi achieving 30 FPS real-time inference. AWS microservices architecture handling peak loads with SageMaker training and EKS deployment.',
-    tech: ['AWS Lambda', 'SageMaker', 'EKS', 'YOLO v3', 'OpenCV', 'Raspberry Pi']
+    highlights: [
+      'Published research on real-time driver monitoring - 92% accuracy',
+      'CNN, YOLO v3, OpenCV deployed on Raspberry Pi edge devices',
+      'Architected AWS microservices handling 100K+ requests/second',
+      'Multi-threaded architecture processing 30 FPS for lane departure, collision avoidance',
+      'IoT sensor fusion: camera, ultrasonic, GPS integration'
+    ],
+    tech: ['AWS Lambda', 'SageMaker', 'YOLO v3', 'TensorFlow', 'Docker', 'EKS']
   },
   {
     title: 'Real-Time Chat Platform',
-    subtitle: 'Scalable full-stack application',
+    subtitle: 'WebSocket | Microservices | Scalable Architecture',
     icon: '💬',
     gradient: 'from-green-500 to-emerald-600',
     metrics: [
       { value: '1,000+', label: 'Concurrent Users' },
-      { value: '30%', label: 'SQL Performance' }
+      { value: '30%', label: 'SQL Performance' },
+      { value: '10K+', label: 'Req/Sec' },
+      { value: 'Real-time', label: 'Messaging' }
     ],
-    description: 'Built scalable real-time chat platform using Node.js and Socket.io for WebSocket connections. MongoDB for message storage, Redis for session management. Developed Spring Boot REST APIs with optimized SQL queries for financial services.',
+    highlights: [
+      'Built scalable chat platform using Node.js, Express.js, Angular 2',
+      'WebSocket connections (Socket.io) for bi-directional communication',
+      'MongoDB for message persistence, Redis for session management',
+      'RESTful APIs with Spring Boot and Hibernate ORM',
+      'Improved SQL query performance by 30% through optimization'
+    ],
     tech: ['Node.js', 'Socket.io', 'Angular 2', 'MongoDB', 'Redis', 'Spring Boot']
   }
 ]
@@ -56,51 +77,62 @@ function ProjectCard({ project, index }) {
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      whileHover={{ y: -10, scale: 1.02 }}
-      className="group relative bg-slate-900/50 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-300"
     >
-      {/* Header with gradient */}
-      <div className={`bg-gradient-to-br ${project.gradient} p-10 relative overflow-hidden`}>
-        <motion.div
-          className="absolute inset-0 bg-black/20"
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
-        <div className="relative z-10">
-          <div className="text-6xl mb-4">{project.icon}</div>
-          <h3 className="text-3xl font-bold mb-2">{project.title}</h3>
-          <p className="text-white/90">{project.subtitle}</p>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-8">
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          {project.metrics.map((metric, i) => (
-            <div key={i} className="bg-slate-800/50 rounded-xl p-4 text-center">
-              <div className="text-2xl font-bold text-gradient">{metric.value}</div>
-              <div className="text-sm text-gray-400 font-semibold">{metric.label}</div>
+      <Tilt tiltMaxAngleX={15} tiltMaxAngleY={15} perspective={1000} scale={1.05} transitionSpeed={2000} gyroscope={true}
+        
+      >
+        <div className="group relative bg-slate-900/50 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-300 h-full">
+          {/* Header with gradient */}
+          <div className={`bg-gradient-to-br ${project.gradient} p-8 relative overflow-hidden`}>
+            <motion.div
+              className="absolute inset-0 bg-black/20"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+            <div className="relative z-10">
+              <div className="text-5xl mb-3">{project.icon}</div>
+              <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+              <p className="text-white/90 text-sm">{project.subtitle}</p>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Description */}
-        <p className="text-gray-400 mb-6 leading-relaxed">{project.description}</p>
+          {/* Content */}
+          <div className="p-6">
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              {project.metrics.map((metric, i) => (
+                <div key={i} className="bg-slate-800/50 rounded-xl p-3 text-center">
+                  <div className="text-xl font-bold text-gradient">{metric.value}</div>
+                  <div className="text-xs text-gray-400 font-semibold">{metric.label}</div>
+                </div>
+              ))}
+            </div>
 
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech, i) => (
-            <span
-              key={i}
-              className="px-3 py-1 bg-slate-800 rounded-lg text-sm font-semibold border border-white/10 hover:border-primary transition-colors"
-            >
-              {tech}
-            </span>
-          ))}
+            {/* Highlights */}
+            <ul className="space-y-2 mb-5">
+              {project.highlights.map((highlight, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                  <span className="text-primary mt-1 text-xs">▸</span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((tech, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 bg-slate-800 rounded-lg text-xs font-semibold border border-white/10 hover:border-primary transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </Tilt>
     </motion.div>
   )
 }
@@ -124,7 +156,7 @@ export default function Projects() {
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
             <span className="text-gradient">Featured Projects</span>
           </h2>
-          <p className="text-xl text-gray-400">Production-scale ML systems and full-stack applications</p>
+          <p className="text-xl text-gray-400">Production-scale ML systems and distributed applications</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
